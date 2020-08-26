@@ -3,6 +3,31 @@ const express = require('express');
 const path = require('path');
 const PORT = process.env.PORT || 5000;
 const { Pool } = require('pg');
+const { Telegraf } = require('telegraf')
+
+const bot = new Telegraf(process.env.BOT_TOKEN)
+
+bot.use(async (_ctx, next) => {
+  const start = new Date()
+  await next()
+  const ms = new Date() - start
+  console.log('Response time: %sms', ms)
+})
+
+bot.catch((err, ctx) => {
+  console.log(`Ooops, encountered an error for ${ctx.updateType}`, err)
+})
+
+bot.start((ctx) => ctx.reply('Welcome'))
+bot.help((ctx) => ctx.reply('Send me a sticker'))
+bot.on('sticker', (ctx) => ctx.reply('👍'))
+bot.hears('hi', (ctx) => ctx.reply('Hey there'))
+
+bot.command('oldschool', (ctx) => ctx.reply('Hello'))
+bot.command('modern', ({ reply }) => reply('Yo'))
+bot.command('hipster', Telegraf.reply('λ'))
+
+bot.launch()
 
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
