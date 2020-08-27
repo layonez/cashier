@@ -1,4 +1,4 @@
-const cool = require("cool-ascii-faces");
+require('dotenv').config()
 const express = require("express");
 const path = require("path");
 const PORT = process.env.PORT || 5000;
@@ -18,13 +18,36 @@ bot.catch((err, ctx) => {
   console.log(`Ooops, encountered an error for ${ctx.updateType}`, err);
 });
 
-bot.start((ctx) =>
+isExistedUser = async userId =>{
+    const client = await pool.connect();
+    const result = await client.query(`SELECT * FROM "user" where id=${userId};`);
+    client.release();
+
+    return !!result.rows.length;
+}
+
+createNewUser = async (userId,username) =>{
+  const client = await pool.connect();
+  await client.query(`INSERT INTO "user" (id,name) VALUES (${userId},'${username}');`);
+  client.release();
+}
+
+bot.start(async (ctx) =>{
+  const userId = ctx.from.id
+  const userExist = await isExistedUser(userId)
+  if(!userExist){
+    createNewUser(userId, ctx.from.username)
+  }
+
   ctx.reply(
     `Hi ${ctx.from.first_name} ${ctx.from.last_name || ""}! 🎉\n` +
       "I can do couple of things\n" +
       "send me /income + number to add some 🤑🤑🤑\n" +
       "or /show to see what you got 🙈"
   )
+}
+
+  
 );
 bot.help((ctx) => ctx.reply("Send me a sticker"));
 bot.on("sticker", (ctx) => ctx.reply("👍"));
@@ -70,27 +93,17 @@ bot.launch();
 
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
-  ssl: {
-    rejectUnauthorized: false,
-  },
+  ssl: false
+  // ssl: {
+  //   rejectUnauthorized: false,
+  // },
 });
-
-showTimes = () => {
-  let result = "";
-  const times = process.env.TIMES || 5;
-  for (i = 0; i < times; i++) {
-    result += i + " ";
-  }
-  return result;
-};
 
 express()
   .use(express.static(path.join(__dirname, "public")))
   .set("views", path.join(__dirname, "views"))
   .set("view engine", "ejs")
   .get("/", (_req, res) => res.render("pages/index"))
-  .get("/cool", (_req, res) => res.send(cool()))
-  .get("/times", (_req, res) => res.send(showTimes()))
   .get("/db", async (_req, res) => {
     try {
       const client = await pool.connect();
