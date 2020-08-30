@@ -1,2 +1,2 @@
-web: node index.js
+web: node ./src/bin/www
 heroku ps

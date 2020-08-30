@@ -1,0 +1,11 @@
+# How to use this config https://github.com/editorconfig/editorconfig/wiki/EditorConfig-Properties
+
+root = true
+# The [*] means that we want to apply the rules that come under it to every file in the project.
+[*]
+indent_style = space
+quote_type=single
+indent_size = 2
+charset = utf-8
+trim_trailing_whitespace = false
+insert_final_newline = true

@@ -7,18 +7,37 @@
   },
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
-    "test": "node test.js"
+    "pretty": "prettier --write \"**/*.{js,json}\" \"!node_modules/**\"",
+    "postpretty": "./node_modules/.bin/eslint ./src --fix",
+    "prestart": "babel ./src --out-dir build",
+    "start": "node ./src/bin/www",
+    "startdev": "nodemon --exec babel-node ./src/bin/www"
   },
   "dependencies": {
+    "@babel/cli": "^7.10.5",
+    "@babel/core": "^7.11.4",
+    "@babel/node": "^7.10.5",
+    "@babel/plugin-transform-runtime": "^7.11.0",
+    "@babel/preset-env": "^7.11.0",
+    "@babel/register": "^7.10.5",
+    "@babel/runtime": "^7.11.2",
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
     "dotenv": "^8.2.0",
     "ejs": "^2.5.6",
-    "express": "^4.15.2",
+    "eslint": "^7.7.0",
+    "eslint-config-airbnb-base": "^14.2.0",
+    "eslint-plugin-import": "^2.22.0",
+    "express": "~4.16.1",
+    "http-errors": "~1.6.3",
+    "morgan": "~1.9.1",
     "pg": "^8.3.2",
+    "prettier": "^2.1.1",
     "telegraf": "^3.38.0"
   },
   "devDependencies": {
     "got": "^11.3.0",
+    "nodemon": "^2.0.4",
     "tape": "^4.7.0"
   },
   "repository": {
