@@ -2,6 +2,7 @@
 /**
  * Module dependencies.
  */
+
 import debug from 'debug';
 import http from 'http';
 import { stdout } from 'process';
@@ -43,16 +44,16 @@ const onError = (error) => {
   const bind = typeof port === 'string' ? `Pipe ${port}` : `Port ${port}`;
   // handle specific listen errors with friendly messages
   switch (error.code) {
-    case 'EACCES':
-      stdout(`${bind} requires elevated privileges`);
-      process.exit(1);
-      break;
-    case 'EADDRINUSE':
-      stdout(`${bind} is already in use`);
-      process.exit(1);
-      break;
-    default:
-      throw error;
+  case 'EACCES':
+    stdout(`${bind} requires elevated privileges`);
+    process.exit(1);
+    break;
+  case 'EADDRINUSE':
+    stdout(`${bind} is already in use`);
+    process.exit(1);
+    break;
+  default:
+    throw error;
   }
 };
 

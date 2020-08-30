@@ -1,3 +1,9 @@
+[![Build Status](https://travis-ci.com/layonez/cashier.svg?branch=master)](https://travis-ci.com/layonez/cashier)
+[![Maintainability](https://api.codeclimate.com/v1/badges/7d8b40edcd88ccb9d6a1/maintainability)](https://codeclimate.com/github/layonez/cashier/maintainability)
+[![Coverage Status](https://coveralls.io/repos/github/layonez/cashier/badge.svg?branch=master)](https://coveralls.io/github/layonez/cashier?branch=master)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/7d8b40edcd88ccb9d6a1/test_coverage)](https://codeclimate.com/github/layonez/cashier/test_coverage)
+[![Build status](https://ci.appveyor.com/api/projects/status/uabqx72ncy69s0xu?svg=true)](https://ci.appveyor.com/project/layonez/cashier)
+
 # node-js-getting-started
 
 A barebones Node.js app using [Express 4](http://expressjs.com/).

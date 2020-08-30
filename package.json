@@ -5,14 +5,14 @@
   "engines": {
     "node": "12.x"
   },
-  "main": "index.js",
   "scripts": {
     "pretty": "prettier --write \"**/*.{js,json}\" \"!node_modules/**\"",
     "postpretty": "./node_modules/.bin/eslint ./src --fix",
     "prestart": "babel ./src --out-dir build",
-    "start": "node ./src/bin/www",
+    "start": "node ./build/bin/www",
     "startdev": "nodemon --exec babel-node ./src/bin/www",
-    "test": "nyc --reporter=html --reporter=text --reporter=lcov mocha -r @babel/register"
+    "test": "nyc --reporter=html --reporter=text --reporter=lcov mocha -r @babel/register",
+    "coverage": "nyc report --reporter=text-lcov | coveralls"
   },
   "dependencies": {
     "@babel/cli": "^7.10.5",
