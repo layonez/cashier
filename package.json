@@ -11,7 +11,8 @@
     "postpretty": "./node_modules/.bin/eslint ./src --fix",
     "prestart": "babel ./src --out-dir build",
     "start": "node ./src/bin/www",
-    "startdev": "nodemon --exec babel-node ./src/bin/www"
+    "startdev": "nodemon --exec babel-node ./src/bin/www",
+    "test": "nyc --reporter=html --reporter=text --reporter=lcov mocha -r @babel/register"
   },
   "dependencies": {
     "@babel/cli": "^7.10.5",
@@ -21,7 +22,9 @@
     "@babel/preset-env": "^7.11.0",
     "@babel/register": "^7.10.5",
     "@babel/runtime": "^7.11.2",
+    "chai": "^4.2.0",
     "cookie-parser": "~1.4.4",
+    "coveralls": "^3.1.0",
     "debug": "~2.6.9",
     "dotenv": "^8.2.0",
     "ejs": "^2.5.6",
@@ -30,9 +33,13 @@
     "eslint-plugin-import": "^2.22.0",
     "express": "~4.16.1",
     "http-errors": "~1.6.3",
+    "mocha": "^8.1.3",
     "morgan": "~1.9.1",
+    "nyc": "^15.1.0",
     "pg": "^8.3.2",
     "prettier": "^2.1.1",
+    "sinon-chai": "^3.5.0",
+    "supertest": "^4.0.2",
     "telegraf": "^3.38.0"
   },
   "devDependencies": {
