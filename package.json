@@ -13,7 +13,8 @@
     "startdev": "nodemon --exec babel-node ./src/bin/www",
     "test": "nyc --reporter=html --reporter=text --reporter=lcov mocha -r @babel/register",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
-    "runQuery": "babel-node ./src/utils/runQuery"
+    "runQuery": "babel-node ./src/utils/runQuery",
+    "free": "npx kill-port 3000"
   },
   "dependencies": {
     "@babel/cli": "^7.10.5",
