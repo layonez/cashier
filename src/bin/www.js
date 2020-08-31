@@ -5,7 +5,6 @@
 
 import debug from 'debug';
 import http from 'http';
-import { stdout } from 'process';
 import app from '../app';
 /**
  * Normalize a port into a number, string, or false.

@@ -10,4 +10,9 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use('/v1', indexRouter);
 
+// error handler must come last, after every app.use() call
+app.use((err, _req, res) => {
+  res.status(400).json({ error: err.stack });
+});
+
 export default app;
